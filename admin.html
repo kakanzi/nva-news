@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NVA NEWS - Admin Panel</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f1f4f9; color: #172033;
+    }
+    header {
+      background: #101d35; color: white;
+      padding: 20px; border-radius: 12px; text-align: center;
+    }
+    header h1 { color: #ff3348; margin: 0; }
+    .panel {
+      max-width: 600px; margin: 22px auto;
+      padding: 20px; background: white; border-radius: 12px;
+    }
+    label { display: block; margin-top: 16px; font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 12px; margin-top: 7px;
+      border: 1px solid #ccd3df; border-radius: 7px;
+      font-size: 16px;
+    }
+    textarea { min-height: 150px; }
+    button {
+      width: 100%; padding: 15px; margin-top: 20px;
+      background: #e5233d; color: white; border: 0;
+      border-radius: 8px; font-size: 17px; font-weight: bold;
+    }
+    .note { color: #626b7b; font-size: 14px; }
+    #result { white-space: pre-wrap; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NVA NEWS</h1>
+    <p>समाचार व्यवस्थापन प्यानल</p>
+  </header>
+
+  <div class="panel">
+    <h2>नयाँ समाचार थप्नुहोस्</h2>
+    <form id="newsForm">
+      <label>समाचारको शीर्षक</label>
+      <input id="title" required placeholder="शीर्षक लेख्नुहोस्">
+
+      <label>समाचारको प्रकार</label>
+      <select id="category" required>
+        <option value="">छान्नुहोस्</option>
+        <option>राष्ट्रिय</option>
+        <option>राजनीति</option>
+        <option>समाज</option>
+        <option>खेलकुद</option>
+        <option>मनोरञ्जन</option>
+        <option>प्रविधि</option>
+      </select>
+
+      <label>प्रकाशित मिति</label>
+      <input id="date" type="date" required>
+
+      <label>फोटोको फाइल नाम</label>
+      <input id="photo" placeholder="जस्तै: news2.jpg">
+
+      <label>पूरा समाचार</label>
+      <textarea id="article" required placeholder="पूरा समाचार लेख्नुहोस्"></textarea>
+
+      <button id="saveButton" type="submit">💾 समाचार सेभ गर्नुहोस्</button>
+    </form>
+
+    <p id="result" role="status"></p>
+    <p class="note">
+      समाचार Firebase Database मा सेभ हुनेछ।
+      मुख्य वेबसाइटमा देखाउन त्यहाँ पनि Firebase जोड्नुपर्छ।
+    </p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from
+      "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+    import {
+      getDatabase,
+      ref,
+      push,
+      set
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAVRog0eYJqBVErHaLcqiZlRWtFlexsSH4",
+      authDomain: "nva-news-14bee.firebaseapp.com",
+      databaseURL: "https://nva-news-14bee-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "nva-news-14bee",
+      storageBucket: "nva-news-14bee.firebasestorage.app",
+      messagingSenderId: "35755643029",
+      appId: "1:35755643029:web:d47cf06e1b38b101b78b9c"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const form = document.getElementById("newsForm");
+    const result = document.getElementById("result");
+    const saveButton = document.getElementById("saveButton");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      saveButton.disabled = true;
+      result.textContent = "समाचार सेभ हुँदैछ...";
+
+      const news = {
+        title: document.getElementById("title").value.trim(),
+        category: document.getElementById("category").value,
+        date: document.getElementById("date").value,
+        photo: document.getElementById("photo").value.trim(),
+        article: document.getElementById("article").value.trim(),
+        createdAt: Date.now()
+      };
+
+      try {
+        const newNewsRef = push(ref(database, "news"));
+        await set(newNewsRef, news);
+        result.textContent = "समाचार Firebase मा सेभ भयो! ❤️";
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        result.textContent =
+          "सेभ भएन। Firebase Database Rules र इन्टरनेट जाँच गर्नुहोस्।";
+      } finally {
+        saveButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
