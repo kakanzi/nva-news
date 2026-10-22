@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NVA NEWS Admin</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f1f4f9;margin:0;padding:20px;color:#172033}
+.panel{max-width:600px;margin:20px auto;background:white;padding:20px;border-radius:12px}
+h1{color:#e5233d;text-align:center}
+label{display:block;margin-top:15px;font-weight:bold}
+input,select,textarea,button{width:100%;box-sizing:border-box;padding:12px;margin-top:7px;font-size:16px}
+textarea{min-height:130px}
+button{background:#e5233d;color:white;border:0;border-radius:7px;margin-top:18px}
+#newsPanel{display:none}
+</style>
+</head>
+<body>
+<div class="panel">
+<h1>NVA NEWS</h1>
+<h2>Admin Login</h2>
+<label>Email</label>
+<input id="email" type="email" value="nepalideep27@gmail.com">
+<label>Password</label>
+<input id="password" type="password" placeholder="Firebase को Password">
+<button id="loginBtn">Login</button>
+<button id="logoutBtn" style="display:none;background:#555">Logout</button>
+<p id="result"></p>
+</div>
+
+<div class="panel" id="newsPanel">
+<h2>नयाँ समाचार थप्नुहोस्</h2>
+<form id="newsForm">
+<label>शीर्षक</label>
+<input id="title" required>
+<label>समाचारको प्रकार</label>
+<select id="category" required>
+<option value="">छान्नुहोस्</option>
+<option>राष्ट्रिय</option><option>राजनीति</option>
+<option>समाज</option><option>खेलकुद</option>
+<option>मनोरञ्जन</option><option>प्रविधि</option>
+</select>
+<label>प्रकाशित मिति</label>
+<input id="date" type="date" required>
+<label>फोटोको फाइल नाम</label>
+<input id="photo" placeholder="news2.jpg">
+<label>पूरा समाचार</label>
+<textarea id="article" required></textarea>
+<button id="saveBtn" type="submit">समाचार सेभ गर्नुहोस्</button>
+</form>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+ getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const app = initializeApp({
+ apiKey:"AIzaSyAVRog0eYJqBVErHaLcqiZlRWtFlexsSH4",
+ authDomain:"nva-news-14bee.firebaseapp.com",
+ databaseURL:"https://nva-news-14bee-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId:"nva-news-14bee",
+ storageBucket:"nva-news-14bee.firebasestorage.app",
+ messagingSenderId:"35755643029",
+ appId:"1:35755643029:web:d47cf06e1b38b101b78b9c"
+});
+
+const auth = getAuth(app);
+const db = getDatabase(app);
+const result = document.getElementById("result");
+const newsPanel = document.getElementById("newsPanel");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
+loginBtn.onclick = async () => {
+ result.textContent = "Login हुँदैछ...";
+ try {
+  await signInWithEmailAndPassword(
+   auth,
+   document.getElementById("email").value.trim(),
+   document.getElementById("password").value
+  );
+ } catch (e) {
+  result.textContent = "Login भएन। Email/Password जाँच गर।";
+ }
+};
+
+logoutBtn.onclick = () => signOut(auth);
+
+onAuthStateChanged(auth, user => {
+ const isAdmin = user &&
+  user.uid === "IM4g6qnLHAZhsDRW5nNRX8siqA13";
+ newsPanel.style.display = isAdmin ? "block" : "none";
+ logoutBtn.style.display = user ? "block" : "none";
+ loginBtn.style.display = user ? "none" : "block";
+ if (user && !isAdmin) result.textContent = "यो अकाउन्ट Admin होइन।";
+ else if (isAdmin) result.textContent = "Admin Login सफल भयो ❤️";
+});
+
+document.getElementById("newsForm").onsubmit = async e => {
+ e.preventDefault();
+ const user = auth.currentUser;
+ if (!user || user.uid !== "IM4g6qnLHAZhsDRW5nNRX8siqA13") {
+  result.textContent = "पहिले Admin Login गर।";
+  return;
+ }
+
+ const news = {
+  title: document.getElementById("title").value.trim(),
+  category: document.getElementById("category").value,
+  date: document.getElementById("date").value,
+  photo: document.getElementById("photo").value.trim(),
+  article: document.getElementById("article").value.trim(),
+  createdAt: Date.now()
+ };
+
+ try {
+  await set(push(ref(db, "news")), news);
+  result.textContent = "समाचार Firebase मा सेभ भयो ❤️";
+  e.target.reset();
+ } catch (err) {
+  result.textContent = "सेभ भएन। Database Rules जाँच गर्नुपर्छ।";
+  console.error(err);
+ }
+};
+</script>
+</body>
+</html>
