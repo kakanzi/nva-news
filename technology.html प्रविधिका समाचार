@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>प्रविधि समाचार | NVA NEWS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background: #b30000;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 6px 0 0;
+      font-weight: bold;
+    }
+
+    nav {
+      background: #800000;
+      padding: 12px 5px;
+      text-align: center;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 15px;
+    }
+
+    h2 {
+      color: #b30000;
+      border-left: 5px solid #b30000;
+      padding-left: 10px;
+    }
+
+    .news-card {
+      background: white;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px #ddd;
+    }
+
+    .news-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .news-content {
+      padding: 12px;
+    }
+
+    .news-content h3 {
+      margin-top: 0;
+      line-height: 1.7;
+    }
+
+    .news-content p {
+      line-height: 1.7;
+    }
+
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>NVA NEWS</h1>
+    <p>Nepal Voice Alert</p>
+  </header>
+
+  <nav>
+    <a href="index.html">गृहपृष्ठ</a>
+    <a href="rastriya.html">राष्ट्रिय</a>
+    <a href="rajniti.html">राजनीति</a>
+    <a href="samaj.html">समाज</a>
+    <a href="khelkud.html">खेलकुद</a>
+    <a href="manoranjan.html">मनोरञ्जन</a>
+    <a href="technology.html">प्रविधि</a>
+  </nav>
+
+  <main>
+    <h2>प्रविधि समाचार</h2>
+
+    <article class="news-card">
+      <img
+        src="https://placehold.co/800x450?text=Technology+News"
+        alt="प्रविधि समाचार">
+
+      <div class="news-content">
+        <h3>प्रविधि समाचारको शीर्षक यहाँ राख्नुहोस्</h3>
+        <p>
+          मोबाइल, कम्प्युटर, आर्टिफिसियल इन्टेलिजेन्स,
+          इन्टरनेट तथा नयाँ प्रविधिसम्बन्धी समाचार यहाँ प्रकाशित गरिनेछन्।
+        </p>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    <p>© NVA NEWS | Nepal Voice Alert</p>
+  </footer>
+
+</body>
+</html>

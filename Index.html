@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NVA NEWS — नेपालका ताजा समाचार">
+<title>NVA NEWS | Nepal Voice Alert</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --red: #f52235;
+  --navy: #101a32;
+  --blue: #203b67;
+  --bg: #f2f5fa;
+  --text: #172033;
+  --muted: #657087;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, "Noto Sans Devanagari", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container,
+main {
+  width: 100%;
+  max-width: 1180px;
+  margin: auto;
+}
+
+main {
+  padding: 20px 15px;
+}
+
+/* HEADER */
+.site-header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border-bottom: 4px solid var(--red);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 15px;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+.brand h1 {
+  color: white;
+  margin: 0;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.brand p {
+  color: white;
+  margin: 4px 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.tagline {
+  color: #e3c779;
+  font-size: 12px;
+}
+
+/* NAVIGATION */
+.menu-bar {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: var(--navy);
+  border-bottom: 3px solid var(--red);
+}
+
+.menu-bar a {
+  flex-shrink: 0;
+  padding: 14px 15px;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.menu-bar a:hover {
+  background: var(--red);
+}
+
+/* BREAKING NEWS */
+.breaking-news {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  overflow: hidden;
+  border-bottom: 1px solid #e1e7f0;
+}
+
+.breaking-label {
+  flex-shrink: 0;
+  padding: 12px 10px;
+  background: var(--red);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.ticker {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 20s linear infinite;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* SECTION TITLE */
+.section-title {
+  margin: 0 0 15px;
+  padding-left: 10px;
+  border-left: 5px solid var(--red);
+  font-size: 21px;
+  color: var(--blue);
+}
+
+/* NEWS CARDS */
+.featured-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.featured-card,
+.side-card,
+.news-card {
+  min-width: 0;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #e3e8f0;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(16,26,50,.08);
+}
+
+.featured-card img,
+.side-card img,
+.news-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: #e1e5ec;
+}
+
+.featured-content {
+  padding: 16px;
+}
+
+.category {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #fff0f1;
+  color: #e51b32;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.featured-content h2 {
+  margin: 0 0 10px;
+  font-size: 23px;
+  line-height: 1.6;
+}
+
+.featured-content p,
+.news-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 15px;
+  background: var(--red);
+  color: white;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.side-news {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.side-card img {
+  margin-bottom: 0;
+}
+
+.side-card > div {
+  padding: 10px;
+}
+
+.side-card h3 {
+  margin: 5px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* LATEST NEWS */
+.latest-section,
+.category-section {
+  margin-top: 30px;
+}
+
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.news-card img {
+  margin: 0;
+}
+
+.news-info {
+  padding: 13px;
+}
+
+.news-info h3 {
+  margin: 5px 0 8px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* CATEGORY LINKS */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.category-box {
+  padding: 18px 10px;
+  background: white;
+  border: 1px solid #e2e8f2;
+  border-bottom: 4px solid var(--red);
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--blue);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 30px;
+  padding: 25px 15px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border-top: 4px solid var(--red);
+  color: white;
+}
+
+footer h2 {
+  margin: 0 0 7px;
+}
+
+footer p {
+  margin: 5px 0;
+  color: #d9e2f2;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* MOBILE DESIGN */
+@media (max-width: 700px) {
+  main {
+    padding: 16px 10px;
+  }
+
+  .header-inner {
+    gap: 10px;
+    padding: 12px 8px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .brand h1 {
+    font-size: 27px;
+  }
+
+  .brand p {
+    font-size: 12px;
+  }
+
+  .tagline {
+    font-size: 10px;
+  }
+
+  .featured-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side-news {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .news-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .featured-content {
+    padding: 13px;
+  }
+
+  .featured-content h2 {
+    font-size: 20px;
+  }
+
+  .news-info {
+    padding: 10px;
+  }
+
+  .news-info h3 {
+    font-size: 14px;
+  }
+
+  .news-info p {
+    font-size: 12px;
+  }
+
+  .side-card h3 {
+    font-size: 13px;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .brand h1 {
+    font-size: 23px;
+  }
+
+  .news-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker span {
+    animation: none;
+    padding-left: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <img class="logo" src="logo.png/photo.jpg" alt="NVA NEWS Logo">
+
+    <div class="brand">
+      <h1>NVA NEWS</h1>
+      <p>Nepal Voice Alert</p>
+      <div class="tagline">सत्य, निष्पक्ष र ताजा समाचार</div>
+    </div>
+  </div>
+</header>
+
+<nav class="menu-bar">
+  <a href="index.html">गृहपृष्ठ</a>
+  <a href="rastriya.html">राष्ट्रिय</a>
+  <a href="rajniti.html">राजनीति</a>
+  <a href="samaj.html">समाज</a>
+  <a href="khelkud.html">खेलकुद</a>
+  <a href="manoranjan.html">मनोरञ्जन</a>
+  <a href="technology.html">प्रविधि</a>
+</nav>
+
+<div class="breaking-news">
+  <span class="breaking-label">BREAKING NEWS</span>
+  <div class="ticker">
+    <span>NVA NEWS मा स्वागत छ — नेपालका ताजा समाचार पढ्नुहोस्।</span>
+  </div>
+</div>
+
+<main>
+
+<section>
+  <h2 class="section-title">मुख्य समाचार</h2>
+
+  <div class="featured-layout">
+
+    
+
+    <article class="featured-card">
+      <a href="news-detail.html">
+  <img src="news1.jpg" alt="मुख्य समाचारको फोटो">
+      </a>
+      
+
+      <div class="featured-content">
+        <span class="category">विशेष</span>
+        <h2>
+  <a href="news-detail.html">नेपालका ताजा समाचार अब NVA NEWS मा</a>
+        </h2>
+        <p>राष्ट्रिय, राजनीति, समाज, खेलकुद, मनोरञ्जन र प्रविधिका महत्त्वपूर्ण समाचार पढ्नुहोस्।</p>
+
+
+<a class="read-more" href="news-detail.html?title=नेपालका%20ताजा%20समाचार&category=राष्ट्रिय&image=news1.jpg&date=२०८३&article=नेपालका%20ताजा%20समाचार">समाचार पूरा पढ्नुहोस् →</a>
+
+
+
+
+
+
+
+        
+      </div>
+    </article>
+
+    <div class="side-news">
+
+      <article class="side-card">
+        <img src="news3.jpg" alt="राष्ट्रिय समाचार">
+        <div>
+          <span class="category">राष्ट्रिय</span>
+          <h3><a href="rastriya.html">राष्ट्रिय समाचार पढ्नुहोस्</a></h3>
+        </div>
+      </article>
+
+      <article class="side-card">
+        <img src="news4.jpg" alt="राजनीति समाचार">
+        <div>
+          <span class="category">राजनीति</span>
+          <h3><a href="rajniti.html">राजनीतिका ताजा अपडेट</a></h3>
+        </div>
+      </article>
+
+      <article class="side-card">
+        <img src="news5.jpg" alt="खेलकुद समाचार">
+        <div>
+          <span class="category">खेलकुद</span>
+          <h3><a href="khelkud.html">खेलकुदका ताजा अपडेट</a></h3>
+        </div>
+      </article>
+
+      <article class="side-card">
+        <img src="news2.jpg" alt="प्रविधि समाचार">
+        <div>
+          <span class="category">प्रविधि</span>
+          <h3><a href="technology.html">नयाँ प्रविधिका समाचार</a></h3>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="latest-section" id="latest-news">
+
+  
+<div id="admin-news-list"></div>
+
+  <h2 class="section-title">ताजा समाचार</h2>
+
+  <div class="news-list">
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="राष्ट्रिय समाचार">
+      <div class="news-info">
+        <span class="category">राष्ट्रिय</span>
+        <h3><a href="rastriya.html">राष्ट्रिय समाचारका मुख्य अपडेट</a></h3>
+        <p>राष्ट्रिय घटनाक्रमसम्बन्धी समाचार पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="राजनीति समाचार">
+      <div class="news-info">
+        <span class="category">राजनीति</span>
+        <h3><a href="rajniti.html">राजनीतिका ताजा खबर</a></h3>
+        <p>राजनीति र सरकारसम्बन्धी समाचार पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="समाज समाचार">
+      <div class="news-info">
+        <span class="category">समाज</span>
+        <h3><a href="samaj.html">समाजका मुख्य समाचार</a></h3>
+        <p>समाज र जनजीवनसम्बन्धी जानकारी पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="खेलकुद समाचार">
+      <div class="news-info">
+        <span class="category">खेलकुद</span>
+        <h3><a href="khelkud.html">क्रिकेट र फुटबलका अपडेट</a></h3>
+        <p>खेलकुदका समाचार र नतिजा पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="मनोरञ्जन समाचार">
+      <div class="news-info">
+        <span class="category">मनोरञ्जन</span>
+        <h3><a href="manoranjan.html">मनोरञ्जनका नयाँ खबर</a></h3>
+        <p>चलचित्र, कलाकार र संगीतसम्बन्धी समाचार पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img src="news1.jpg" alt="प्रविधि समाचार">
+      <div class="news-info">
+        <span class="category">प्रविधि</span>
+        <h3><a href="technology.html">प्रविधिका नयाँ अपडेट</a></h3>
+        <p>मोबाइल, इन्टरनेट र प्रविधिका खबर पढ्नुहोस्।</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="category-section">
+  <h2 class="section-title">समाचारका विधाहरू</h2>
+  <div class="category-grid">
+    <a class="category-box" href="rastriya.html">🇳🇵 राष्ट्रिय</a>
+    <a class="category-box" href="rajniti.html">🏛️ राजनीति</a>
+    <a class="category-box" href="samaj.html">👥 समाज</a>
+    <a class="category-box" href="khelkud.html">🏏 खेलकुद</a>
+    <a class="category-box" href="manoranjan.html">🎬 मनोरञ्जन</a>
+    <a class="category-box" href="technology.html">💻 प्रविधि</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <h2>NVA NEWS</h2>
+  <p>Nepal Voice Alert</p>
+  <p>सत्य, निष्पक्ष र ताजा समाचार</p>
+  <p>© 2026 NVA NEWS. सर्वाधिकार सुरक्षित।</p>
+</footer>
+
+
+<script>
+(function () {
+  const container = document.getElementById("admin-news-list");
+  if (!container) return;
+
+  try {
+    const newsList = JSON.parse(
+      localStorage.getItem("nvaNews") || "[]"
+    );
+
+    if (newsList.length === 0) {
+      container.textContent = "नयाँ समाचार चाँडै आउँदैछन्।";
+      return;
+    }
+
+    newsList.slice().reverse().forEach(function (news) {
+      const card = document.createElement("article");
+      card.style.cssText =
+        "background:white;padding:16px;margin:16px 0;border-radius:10px;border:1px solid #ddd;";
+
+      if (news.photo) {
+        const img = document.createElement("img");
+        img.src = news.photo;
+        img.alt = news.title || "समाचारको फोटो";
+        img.style.cssText =
+          "width:100%;max-height:280px;object-fit:cover;border-radius:8px;";
+        card.appendChild(img);
+      }
+
+      const category = document.createElement("p");
+      category.textContent = news.category || "समाचार";
+      category.style.color = "#e5233d";
+      card.appendChild(category);
+
+      const heading = document.createElement("h2");
+      heading.textContent = news.title || "";
+      card.appendChild(heading);
+
+      const date = document.createElement("p");
+      date.textContent = news.date || "";
+      card.appendChild(date);
+
+      const article = document.createElement("p");
+      article.textContent = news.article || "";
+      article.style.whiteSpace = "pre-wrap";
+      card.appendChild(article);
+
+      container.appendChild(card);
+    });
+  } catch (error) {
+    container.textContent = "समाचार लोड हुन सकेन।";
+  }
+})();
+</script>
+</body>
+</html>
+
+
+<script>
+(function () {
+  const container = document.getElementById("admin-news-list");
+  if (!container) return;
+
+  const newsList = JSON.parse(localStorage.getItem("nvaNews") || "[]");
+
+  newsList.slice().reverse().forEach(function (news) {
+    const card = document.createElement("article");
+    card.style.cssText =
+      "background:white;padding:16px;margin:16px 0;border-radius:10px;";
+
+    const title = document.createElement("h2");
+    title.textContent = news.title || "";
+    card.appendChild(title);
+
+    const category = document.createElement("p");
+    category.textContent = news.category || "";
+    card.appendChild(category);
+
+    const date = document.createElement("p");
+    date.textContent = news.date || "";
+    card.appendChild(date);
+
+    if (news.photo) {
+      const img = document.createElement("img");
+      img.src = news.photo;
+      img.alt = news.title || "समाचारको फोटो";
+      img.style.width = "100%";
+      card.appendChild(img);
+    }
+
+    const article = document.createElement("p");
+    article.textContent = news.article || "";
+    card.appendChild(article);
+
+    container.appendChild(card);
+  });
+})();
+</script>
+  
+</body>
+</html>

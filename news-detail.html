@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>समाचार | NVA NEWS</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f5f8;
+      color: #222;
+      line-height: 1.8;
+    }
+
+    header {
+      background: #071b36;
+      color: white;
+      padding: 18px 15px;
+      text-align: center;
+      border-bottom: 4px solid #e21b2d;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    header p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      background: #e21b2d;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .label {
+      display: inline-block;
+      background: #e21b2d;
+      color: white;
+      padding: 3px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 3px;
+    }
+
+    h2 {
+      font-size: 27px;
+      line-height: 1.5;
+      margin: 14px 0;
+    }
+
+    .date {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .news-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 7px;
+      display: block;
+    }
+
+    .article {
+      font-size: 17px;
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 20px;
+      background: #071b36;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #071b36;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      margin-top: 25px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 12px;
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>NVA NEWS</h1>
+    <p>NEPAL VOICE ALERT</p>
+  </header>
+
+  <nav>
+    <a href="index.html">← गृहपृष्ठमा फर्कनुहोस्</a>
+  </nav>
+
+  <main>
+    <span class="label">मुख्य समाचार</span>
+
+    <h2>यहाँ समाचारको शीर्षक लेख्नुहोस्</h2>
+
+    <div class="date">
+      प्रकाशित मिति: २०८३
+    </div>
+
+    <img
+      class="news-photo"
+      src="news1.jpg"
+      alt="समाचारको फोटो"
+    >
+
+    <div class="article">यहाँ समाचारको पूरा विवरण लेख्नुहोस्।
+
+समाचार लेख्दा के भयो, कहाँ भयो, कहिले भयो र सम्बन्धित विवरण स्पष्ट रूपमा राख्नुहोस्।
+
+पुष्टि नभएको जानकारीलाई तथ्यका रूपमा प्रकाशित नगर्नुहोस्।</div>
+
+    <a class="back" href="index.html">
+      ← सबै समाचार हेर्नुहोस्
+    </a>
+  </main>
+
+  <footer>
+    © 2026 NVA NEWS | Nepal Voice Alert
+    <br>
+    सत्य, निष्पक्ष र विश्वसनीय समाचार
+  </footer>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  const title = params.get("title");
+  const category = params.get("category");
+  const image = params.get("image");
+  const date = params.get("date");
+  const article = params.get("article");
+
+  if (title) {
+    document.querySelector("main h2").textContent = title;
+    document.title = title + " | NVA NEWS";
+  }
+
+  if (category) {
+    document.querySelector(".label").textContent = category;
+  }
+
+  if (image) {
+    document.querySelector(".news-photo").src = image;
+  }
+
+  if (date) {
+    document.querySelector(".date").textContent =
+      "प्रकाशित मिति: " + date;
+  }
+
+  if (article) {
+    document.querySelector(".article").textContent =
+      article.replace(/\|/g, "\n\n");
+  }
+</script>
+  
+</body>
+</html>
